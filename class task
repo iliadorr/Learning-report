@@ -1,0 +1,95 @@
+# Hey Professor Tauheed, hope you're having a marvelous day! Here's my report on the exciting stuff I've been learning this semester.
+
+# Class definition for images
+class Image:
+    # Initializing function to set image properties
+    def __init__(self, resolution, title, extension):
+        self.resolution = resolution
+        self.title = title
+        self.extension = extension
+
+    # Method to resize the image
+    def resize(self, new_resolution):
+        self.resolution = new_resolution
+
+    # Method to display image information as a string
+    def __str__(self):
+        return f"{self.title}.{self.extension}"
+
+# Let's create some image objects and play around with them
+dogs = Image('6x4', 'Dogs', 'jpg')
+book = Image('3x4', 'Book', 'pdf')
+car = Image('1920x1080', 'Red car', 'rtf')
+
+# Resizing images and printing their information
+dogs.resize('3x4')
+print(dogs.resolution, dogs.title, dogs.extension)
+
+book.resize('1920x1080')
+print(book.resolution, book.title, book.extension)
+
+car.resize('6x4')
+print(car.resolution, car.title, car.extension)
+
+# Printing a specific image using the __str__ method
+print(car)
+
+# Now, let's explore another class for comments
+class Comment:
+    # Initializing function for comments
+    def __init__(self, text):
+        self.text = text
+
+    # Static method to merge two strings
+    @staticmethod
+    def merge_str(first, second):
+        return f"{first} {second}"
+
+# Creating comment objects and using the merge_str method
+greeting = Comment("Hello world")
+
+first_m = Comment.merge_str('Green', 'apple')
+print(first_m)
+
+second_m = greeting.merge_str('Hi', 'ok')
+print(second_m)
+
+# Let's try another approach to comments, this time with a class variable
+class Comment:
+    # Class variable to keep track of total comments
+    total_comments = 0
+
+    # Initializing function for comments, incrementing total_comments
+    def __init__(self, text):
+        self.text = text
+        Comment.total_comments += 1
+
+# Creating a comment and checking total comments
+first_comment = Comment("My first comment")
+
+print(first_comment.text)
+print(first_comment.total_comments)
+print(Comment.total_comments)
+
+# Modifying total_comments and checking its effect
+Comment.total_comments = 10
+print(Comment.total_comments)
+print(first_comment.total_comments)
+
+# Finally, let's define a class for vehicles
+class Vehicle:
+    # Initializing function for vehicles
+    def __init__(self, name, max_speed, mileage):
+        self.name = name
+        self.max_speed = max_speed
+        self.mileage = mileage
+
+    # Method to display full information about a vehicle
+    def full_info(name, max_speed, mileage):
+        return f"{name}, {max_speed}, {mileage} miles"
+
+# Creating a bus object and printing its information
+bus = Vehicle('Name: Green bus', 'Speed: 100', 'Mileage: 10')
+
+print(Vehicle.full_info('Green bus', '100 km/h', 10))
+print(bus.name, bus.max_speed, bus.mileage, end=' ')
