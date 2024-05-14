@@ -1,0 +1,46 @@
+# Hi Professor Tauheed! Let's take a fun trip into the world of JSON with these examples.
+
+import json  # Importing the JSON module for handling JSON data
+
+# The 1st example: Parsing JSON string into a Python dictionary
+str_data = '{"id": 2762, "brand": "Nike", "qty": 100, "status": {"isForSale": true} }'  # JSON string
+sneakers = json.loads(str_data)  # Parsing JSON string into a Python dictionary
+
+# Accessing and printing values from the dictionary
+print(sneakers["id"])  # Printing the ID of the sneakers
+print(sneakers["brand"])  # Printing the brand of the sneakers
+print(sneakers["qty"])  # Printing the quantity of the sneakers
+print(sneakers["status"])  # Printing the status of the sneakers
+
+# Converting Python dictionary back to JSON string with indentation
+sneakers_str = json.dumps(sneakers, indent=1)  # Converting dictionary to JSON string with indentation
+print(sneakers_str)  # Printing the JSON string representation of the sneakers dictionary
+
+# The 2nd example: Parsing JSON string with product details
+products_str = '{"apple": 140, "mango": 500, "banana": 170, "status": {"is_available": true} }'  # JSON string
+products = json.loads(products_str)  # Parsing JSON string into a Python dictionary
+
+# Accessing and printing product quantities and status
+print(products["apple"])  # Printing the quantity of apples
+print(products["mango"])  # Printing the quantity of mangoes
+print(products["banana"])  # Printing the quantity of bananas
+print(products["status"])  # Printing the availability status of products
+
+# Converting Python dictionary back to JSON string with indentation
+products_dict_to_str = json.dumps(products, indent=1)  # Converting dictionary to JSON string with indentation
+print(products_dict_to_str)  # Printing the JSON string representation of the products dictionary
+
+# Example 3: Parsing JSON string with costs and availability
+costs_str = '{"shirts": 1000, "jackets": 2500, "shoes": 3700, "status": {"is_available": false} }'  # JSON string
+costs_dict = json.loads(costs_str)  # Parsing JSON string into a Python dictionary
+
+# Accessing and printing availability status and costs
+print(costs_dict["status"])  # Printing the availability status of items
+print(costs_dict)  # Printing the costs dictionary
+
+# Converting Python dictionary back to JSON string with indentation
+costs_str = json.dumps(costs_dict, indent=1)  # Converting dictionary to JSON string with indentation
+print(costs_str)  # Printing the JSON string representation of the costs dictionary
+
+
+#JSON is quite handy for transferring and storing data, isn't it? Let me know if you have any questions or if you'd like to explore more examples!
