@@ -1,0 +1,31 @@
+# Hey Professor Tauheed, let's explore a simple function and its usage with default arguments and the datetime module.
+
+from datetime import date  # Importing the date class from datetime module
+
+# Function to get the current weekday
+def get_weekday():
+    return date.today().strftime('%b.%d.%Y')  # Returning the current date in 'Abbreviated Month.Day.Year' format
+
+# Function to create a new post with optional 'created_on_weekday' field
+def create_new_post(post, weekday=get_weekday()):  # Using get_weekday() as default value for weekday
+    copied_post = post.copy()  # Creating a copy of the initial post
+    copied_post['created_on_weekday'] = weekday  # Adding 'created_on_weekday' field with current weekday
+    return copied_post  # Returning the modified post
+
+# Initial post details
+initial_post = {
+    'id': 230121005,
+    'creator': 'Eldiiar',
+}
+
+# Creating a new post with default weekday
+created_post = create_new_post(post=initial_post)
+print(created_post)  # Printing the created post with the 'created_on_weekday' field
+
+
+#This function create_new_post takes an initial post and adds a created_on_weekday field with the current weekday. The default value for weekday is obtained using the get_weekday() function, which returns the current date in a formatted string. This makes it easy to create posts with the current weekday without explicitly passing the weekday every time. Let me know if you have any questions or need further explanation, Professor!
+
+
+
+
+
