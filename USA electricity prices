@@ -1,0 +1,83 @@
+# Hello Professor Tauheed! Let's dive into some data analysis using Pandas, Statsmodels, and SciPy.
+
+import pandas as pd  # Importing Pandas for data manipulation
+import statsmodels.formula.api as smf  # Importing Statsmodels for statistical modeling
+from scipy import stats  # Importing SciPy for statistical functions
+import matplotlib.pyplot as plt  # Importing Matplotlib for visualization
+
+# Loading the dataset from a CSV file
+electricity_df = pd.read_csv('us_electricity_prices.csv')
+
+# Displaying the first few rows of the dataset
+print(electricity_df.head())
+
+# Creating a linear regression model with 'price' as the dependent variable and 'revenue' and 'sales' as independent variables
+mymodel = smf.ols('price ~ revenue + sales', data=electricity_df)
+
+# Fitting the model to the data
+result = mymodel.fit()
+
+# Printing the summary of the regression results
+print(result.summary())
+
+# Defining a function to predict price based on revenue and sales
+def predict_price(revenue, sales):
+    return 0.0027 * revenue + (-0.0003) * sales + 9.2812
+
+# Testing the predict_price function with some sample values
+print(predict_price(200000, 1000000))  # Predicting price with revenue 200000 and sales 1000000
+print(predict_price(97.79467, 953.02154))  # Predicting price with revenue 97.79467 and sales 953.02154
+
+# Visualization (Optional): You can plot the regression line if needed
+# predicted_prices = predict_price(electricity_df['revenue'], electricity_df['sales'])
+# plt.scatter(electricity_df['price'], predicted_prices)
+# plt.xlabel('Actual Price')
+# plt.ylabel('Predicted Price')
+# plt.title('Actual vs Predicted Prices')
+# plt.show()
+
+
+#This code is all about data analysis using regression techniques. We load the dataset, perform linear regression analysis, print the results summary, and then define a function to predict prices based on revenue and sales. Finally, we test the prediction function with some sample values. Let me know if you have any questions or if you want to delve deeper into any part of the code!
+
+year	month	stateDescription	sectorName	customers	price	revenue	sales
+0	2001	1	Wyoming	all sectors	NaN	4.31	48.12840	1116.17208
+1	2001	1	Wyoming	commercial	NaN	5.13	12.67978	247.08691
+2	2001	1	Wyoming	industrial	NaN	3.26	19.60858	602.30484
+3	2001	1	Wyoming	other	NaN	4.75	0.76868	16.17442
+4	2001	1	Wyoming	residential	NaN	6.01	15.07136	250.60591
+...	...	...	...	...	...	...	...	...
+85865	2024	1	Arkansas	all sectors	1717720.0	9.63	442.98773	4598.63147
+85866	2024	1	Arkansas	commercial	208669.0	10.26	97.79467	953.02154
+85867	2024	1	Arkansas	industrial	34951.0	7.08	109.92656	1553.02838
+85868	2024	1	Arkansas	residential	1474098.0	11.24	235.26399	2092.56172
+85869	2024	1	Arkansas	transportation	2.0	12.70	0.00252	0.01984
+85870 rows × 8 columns
+
+                          OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  price   R-squared:                       0.055
+Model:                            OLS   Adj. R-squared:                  0.055
+Method:                 Least Squares   F-statistic:                     2519.
+Date:                Mon, 15 Apr 2024   Prob (F-statistic):               0.00
+Time:                        08:15:55   Log-Likelihood:            -2.5778e+05
+No. Observations:               85870   AIC:                         5.156e+05
+Df Residuals:                   85867   BIC:                         5.156e+05
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      9.2812      0.017    537.637      0.000       9.247       9.315
+revenue        0.0027   3.85e-05     70.451      0.000       0.003       0.003
+sales         -0.0003    3.9e-06    -67.310      0.000      -0.000      -0.000
+==============================================================================
+Omnibus:                    31173.023   Durbin-Watson:                   1.533
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           387481.570
+Skew:                           1.394   Prob(JB):                         0.00
+Kurtosis:                      13.026   Cond. No.                     2.31e+04
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.31e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
