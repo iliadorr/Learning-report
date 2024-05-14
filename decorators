@@ -1,0 +1,95 @@
+# Hey Professor Tauheed, I've got some more examples to show you. Let's dive into the fascinating world of decorators!
+
+# First example: Simple function decorator
+def decorator_fn(original_fn):
+    # Wrapper function to add behavior before and after calling the original function
+    def wrapper_fn(*args, **kwargs):
+        print("Before")  # Adding some spice before calling the function
+
+        # Calling the original function and capturing its result
+        result = original_fn(*args, **kwargs)
+
+        print("After")  # Adding some excitement after the function execution
+
+        return result
+
+    return wrapper_fn
+
+# Decorator usage with a sample function
+@decorator_fn
+def my_fn(a, b):
+    print("This is a function")  # Displaying a message to let everyone know it's a function
+    return (a, b)
+
+res = my_fn(100, 2)  # Calling the decorated function
+print(res)  # Printing the result
+
+# Second example: Decorator with type checking for function arguments
+def decorator_fn(original_fn):
+    # Wrapper function to check types of arguments before calling the original function
+    def wrapper(*args, **kwargs):
+        for arg in args:  # Looping through positional arguments
+            if not isinstance(arg, int) and not isinstance(arg, float):  # Checking if arg is int or float
+                raise ValueError(f"Type of {arg} is {type(arg)}. All args should be int or float!")
+
+        # Calling the original function with the arguments
+        result = original_fn(*args, **kwargs)
+
+        return result
+
+    return wrapper
+
+# Decorator usage with a function that sums two numbers
+@decorator_fn
+def sum_nums(a, b):
+    return a + b
+
+print(sum_nums(10, 23))  # Calling the decorated function with valid arguments
+
+# Example with dictionary checking: Decorator to check types of arguments in a function that accepts keyword arguments
+def decorator_fn(original_fn):
+    def wrapper(*args, **kwargs):
+        for arg in [*args, *kwargs.values()]:  # Combining positional and keyword arguments
+            if not isinstance(arg, int) and not isinstance(arg, float):
+                raise ValueError(f"Type of {arg} is {type(arg)}. All args should be int or float!")
+
+        result = original_fn(*args, **kwargs)  # Calling the original function
+        return result
+
+    return wrapper
+
+@decorator_fn
+def sum_nums(a, b):
+    return a + b
+
+try:
+    print(sum_nums(10, 23))  # Calling the decorated function with valid arguments
+    print(sum_nums('abc', '12'))  # Calling the decorated function with invalid arguments
+except ValueError as e:
+    print(e)
+
+# User authentication: Decorator to check user authentication before executing a function
+def is_authenticated():
+    return False  # For simplicity, always returning False for this example
+
+def check_user_authentication(fn):
+    def wrapper(*args, **kwargs):
+        if is_authenticated():
+            return fn(*args, **kwargs)  # Call the function if user is authenticated
+        else:
+            raise Exception("User is NOT authenticated")  # Raise exception if user is not authenticated
+
+    return wrapper
+
+@check_user_authentication
+def send_message():
+    print("You are enrolled to the system!")  # Function to send message to enrolled users
+
+try:
+    send_message()  # Trying to send message
+except Exception as e:
+    print(e)  # Printing exception if user is not authenticated
+
+
+#Hope you enjoy these examples, Professor! Decorators are really powerful tools in Python, aren't they? Let me know if you need further explanations or have any questions!
+  
